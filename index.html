@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="es"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%230B2E4F%27/%3E%3Cpath d=%27M16 7l11 5-11 5-11-5z%27 fill=%27%235BC2E7%27/%3E%3Cpath d=%27M9 15v5c0 2 3 4 7 4s7-2 7-4v-5l-7 3z%27 fill=%27%23fff%27/%3E%3C/svg%3E">
+<title>Asistencia Centro de Idiomas UAC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B2E4F; --navy-light:#16406b; --celeste:#5BC2E7; --celeste-soft:#A8DEF5; --turquesa:#7ED4D4; --turquesa-soft:#C4EDED;
+    --paper:#F4F7FA; --card:#FFFFFF; --ink:#1F2E3D; --ink-soft:#6B7A8A; --line:#E4EBF2; --line-soft:#EEF3F8;
+    --p1:#0B2E4F; --p2:#5BC2E7; --p3:#5D7A99;
+    --sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+    --shadow:0 4px 18px rgba(11,46,79,.06);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased;font-size:15px;padding:24px 20px 40px;}
+  ::selection{background:var(--celeste);color:#fff;}
+  .wrap{max-width:1280px;margin:0 auto;}
+  h1,h2,h3{text-wrap:balance;}
+
+  header.masthead{background:var(--navy);border-radius:20px;color:#fff;padding:26px 32px;margin-bottom:20px;box-shadow:var(--shadow);}
+  header.masthead .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;}
+  .masthead h1{font-weight:800;font-size:clamp(1.35rem,3.6vw,1.9rem);line-height:1.2;margin:0 0 6px;border-left:6px solid var(--celeste);padding-left:16px;letter-spacing:-.01em;}
+  .masthead p{margin:0;color:var(--celeste-soft);font-size:.92rem;padding-left:22px;max-width:640px;}
+  .masthead .right{text-align:right;font-size:.85rem;color:var(--celeste-soft);}
+  .masthead .org{font-weight:700;color:#fff;font-size:1rem;margin-bottom:2px;}
+  .upd{margin-top:6px;font-size:.78rem;display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.1);padding:4px 12px;border-radius:20px;}
+  .upd::before{content:"";width:8px;height:8px;border-radius:50%;background:#3DD68C;}
+
+  .filters{position:sticky;top:8px;z-index:20;background:var(--card);border-radius:18px;box-shadow:var(--shadow);border:1px solid var(--line);margin-bottom:22px;}
+  .filters .wrap{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;padding:12px 20px;}
+  .fgroup{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0;}
+  .fgroup > label,.flabel{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;}
+  .seg{display:inline-flex;background:var(--paper);border-radius:12px;padding:3px;flex-wrap:wrap;gap:2px;}
+  .seg button{font:inherit;font-size:.84rem;font-weight:500;background:transparent;color:var(--ink);border:0;padding:6px 14px;border-radius:9px;cursor:pointer;}
+  .seg button:hover{background:var(--celeste-soft);}
+  .seg button[aria-pressed="true"]{background:var(--navy);color:#fff;font-weight:600;}
+  .chk{font:inherit;font-size:.84rem;color:var(--ink);display:inline-flex;align-items:center;gap:7px;cursor:pointer}
+  .chk input{accent-color:var(--navy)}
+  button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--celeste);outline-offset:2px;}
+  .reset{font:inherit;font-size:.82rem;background:none;border:0;color:var(--navy-light);font-weight:600;cursor:pointer;padding:4px;margin-left:auto;}
+  .reset:hover{text-decoration:underline;}
+
+  main.wrap{padding:0;}
+  .stats-row{display:grid;grid-template-columns:1.3fr repeat(4,1fr);gap:16px;margin-bottom:20px;}
+  .stat{background:var(--card);padding:20px 22px;min-width:0;border-radius:18px;box-shadow:var(--shadow);border-bottom:5px solid var(--celeste);}
+  .stat:nth-child(2){border-color:var(--turquesa);} .stat:nth-child(3){border-color:var(--navy-light);}
+  .stat:nth-child(4){border-color:var(--celeste-soft);} .stat:nth-child(5){border-color:#B0BEC5;}
+  .stat .num{font-weight:800;font-size:2rem;line-height:1.05;font-variant-numeric:tabular-nums;color:var(--navy);}
+  .stat.hero .num{font-size:2.7rem;}
+  .stat .lbl{margin-top:8px;font-size:.82rem;color:var(--ink-soft);font-weight:600;}
+  .stat .sub{margin-top:2px;font-size:.76rem;color:var(--ink-soft);}
+  .sw{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:baseline;}
+
+  .info-box{background:linear-gradient(135deg,#eaf6fc,#f0fafa);border-left:6px solid var(--celeste);border-radius:18px;padding:16px 22px;margin-bottom:16px;font-size:.92rem;}
+  .info-box h4{margin:0 0 4px;color:var(--navy);font-size:.95rem;font-weight:700;}
+  .info-box p{margin:0 0 4px;color:var(--ink);}
+  .info-box p:last-child{margin:0}
+  .insights{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:34px;}
+  .insight{background:var(--card);padding:14px 20px;min-width:0;border-radius:16px;box-shadow:var(--shadow);border:1px solid var(--line);}
+  .insight .k{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;}
+  .insight .v{font-weight:700;font-size:1.08rem;margin-top:2px;overflow-wrap:anywhere;color:var(--navy);}
+  .insight .d{font-size:.8rem;color:var(--ink-soft);}
+
+  .section-label{font-size:1.05rem;color:var(--navy);font-weight:700;margin:0 0 14px;display:flex;align-items:center;gap:10px;}
+  .section-label::before{content:"";width:5px;height:20px;border-radius:3px;background:var(--celeste);}
+  .grid{display:grid;gap:18px;margin-bottom:34px;}
+  .g2{grid-template-columns:1fr 1fr;} .g3{grid-template-columns:1fr 1fr 1fr;}
+  .panel{background:var(--card);border-radius:22px;box-shadow:var(--shadow);padding:22px 24px 20px;min-width:0;}
+  .panel h3{font-weight:700;font-size:1.02rem;margin:0 0 4px;color:var(--navy);}
+  .panel h3 .sw{width:12px;height:12px}
+  .panel .note{margin:0 0 14px;font-size:.82rem;color:var(--ink-soft);max-width:68ch;}
+  .legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--ink-soft);margin:0 0 10px;}
+  .legend span{display:inline-flex;align-items:center;}
+  svg{display:block;width:100%;height:auto;overflow:visible}
+  svg text{fill:var(--ink-soft);font:11px Inter,system-ui,sans-serif}
+  .scroll-x{overflow-x:auto;}
+
+  .pk{display:grid;grid-template-columns:1fr 1fr;gap:12px 14px;margin-top:10px}
+  .pk .v{font-weight:800;font-size:1.5rem;color:var(--navy);font-variant-numeric:tabular-nums;line-height:1.1}
+  .pk .v small{font-size:.75rem;font-weight:600;color:var(--ink-soft)}
+  .pk .l{font-size:.78rem;color:var(--ink-soft);font-weight:600}
+  .rank-bar{height:8px;background:var(--line-soft);border-radius:8px;overflow:hidden;margin-top:14px}
+  .rank-bar i{display:block;height:100%;border-radius:8px}
+
+  .cal{margin-bottom:16px}
+  .cal h4{font-size:.9rem;margin:0 0 6px;color:var(--navy);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .cal h4 span.m{color:var(--ink-soft);font-weight:500;font-size:.82rem}
+
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+  .tabs button{font:inherit;font-size:.84rem;background:var(--paper);border:0;color:var(--ink);padding:7px 14px;border-radius:10px;cursor:pointer;font-weight:500;}
+  .tabs button[aria-selected="true"]{background:var(--navy);color:#fff;font-weight:600;}
+  .tp{display:none}.tp.on{display:block}
+  table{border-collapse:collapse;width:100%;font-size:.86rem;font-variant-numeric:tabular-nums;}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);}
+  th{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--navy);font-weight:600;white-space:nowrap;cursor:pointer;user-select:none;position:sticky;top:0}
+  th:first-child{border-radius:10px 0 0 10px;} th:last-child{border-radius:0 10px 10px 0;}
+  .tbl-wrap{overflow:auto;max-height:520px}
+  .tools{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin-bottom:12px}
+  .tools select,.tools input[type=search]{font:inherit;font-size:.84rem;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:6px 10px;}
+  .tag{display:inline-block;border-radius:20px;padding:2px 10px;font-size:.76rem;border:1px solid var(--line);background:var(--paper);color:var(--navy);font-weight:600}
+  .tag.no{background:#fff;border-style:dashed;color:var(--ink-soft);font-weight:500}
+  .tag.fer{background:var(--turquesa-soft);border-color:var(--turquesa)}
+  .src{border:1px solid var(--line);border-radius:16px;padding:14px 18px;margin-bottom:12px}
+  .src h4{margin:0 0 4px;font-size:.92rem;color:var(--navy);word-break:break-word}
+  .src dl{display:grid;grid-template-columns:auto 1fr;gap:2px 14px;margin:8px 0;font-size:.82rem}
+  .src dt{color:var(--ink-soft);font-weight:600}.src dd{margin:0;word-break:break-word}
+  details{margin-top:6px} summary{cursor:pointer;font-weight:600;color:var(--navy-light);font-size:.85rem;padding:4px 0}
+
+  footer{margin-top:10px;padding-top:16px;border-top:1px solid var(--line);font-size:.82rem;color:var(--ink-soft);text-align:center;font-weight:500;}
+  #tip{position:fixed;pointer-events:none;z-index:99;background:var(--navy);color:#fff;padding:8px 12px;border-radius:10px;font-size:.78rem;line-height:1.45;max-width:270px;opacity:0;transition:opacity .08s;box-shadow:0 6px 20px rgba(11,46,79,.3)}
+
+  @media (max-width:1000px){
+    .stats-row{grid-template-columns:1fr 1fr;} .stat.hero{grid-column:1/-1;}
+    .g2,.g3{grid-template-columns:1fr;}
+    .insights{grid-template-columns:1fr;}
+    .masthead .right{text-align:left;}
+    .reset{margin-left:0;}
+  }
+  @media (max-width:520px){ body{padding:12px 12px 30px;} header.masthead{padding:20px 18px;} .panel{padding:16px;} .stat{padding:16px;} .stat .num{font-size:1.7rem;} .stat.hero .num{font-size:2.3rem;} .filters .wrap{padding:10px 14px;} }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+
+  /* ---- impresión (PDF) ---- */
+  body.print{padding:0;background:#fff}
+  body.print .filters,body.print .tabs,body.print .tools,body.print details,body.print #tpDetalle{display:none!important}
+  body.print .wrap{zoom:.74}
+  body.print .tp{display:block!important}
+  body.print .panel,body.print .stat,body.print .insight,body.print .src,body.print .cal,body.print .info-box{break-inside:avoid;box-shadow:none;border:1px solid var(--line)}
+  body.print .grid,body.print .insights{margin-bottom:16px}
+  body.print #secCal,body.print #secHojas{break-before:page}
+  body.print #lblEvo{break-before:page}
+  body.print .section-label{break-after:avoid}
+  body.print #secHojas .panel{break-inside:auto}
+  body.print #ch1 svg{max-height:200px}
+  body.print #ch2 svg,body.print #ch3 svg{max-height:190px}
+  body.print .cal svg{max-width:520px}
+  body.print{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  @page{size:A4 landscape;margin:10mm}
+</style></head>
+<body>
+<header class="masthead"><div class="wrap">
+  <div>
+    <h1>Asistencia del Centro de Idiomas · Semestre 2026-II</h1>
+    <p>Reportes del ERP adjuntos al Oficio Nº 238-2026-CI-UAC (Ticket de Reclamo N.° 00894) e Informe Nº 043-2026-CP-RRHH-UAC.</p>
+  </div>
+  <div class="right">
+    <div class="org">Universidad Andina del Cusco</div>
+    <div>Periodo 03/08/2026 – 12/11/2026</div>
+    <div class="upd">Reportes generados el 13/11/2026 · 5 hojas</div>
+  </div>
+</div></header>
+
+<div class="filters" id="filters"><div class="wrap">
+  <div class="fgroup"><label>Persona</label><div class="seg" id="segP"></div></div>
+  <div class="fgroup"><label>Mes</label><div class="seg" id="segM">
+    <button data-v="all" aria-pressed="true">Todo</button><button data-v="2026-08" aria-pressed="false">Agosto</button><button data-v="2026-09" aria-pressed="false">Septiembre</button><button data-v="2026-10" aria-pressed="false">Octubre</button><button data-v="2026-11" aria-pressed="false">Noviembre</button>
+  </div></div>
+  <label class="chk"><input type="checkbox" id="fHol" checked> Excluir feriados (6 ago, 8 oct, 2 nov)</label>
+  <button class="reset" id="reset">Quitar filtros</button>
+</div></div>
+
+<main class="wrap">
+  <div class="stats-row" id="stats"></div>
+  <div class="info-box" id="info"></div>
+  <div class="insights" id="insights"></div>
+
+  <h2 class="section-label">Resumen por persona</h2>
+  <div class="grid g3" id="cards"></div>
+
+  <h2 class="section-label" id="lblEvo">Evolución mensual</h2>
+  <div class="grid"><div class="panel">
+    <h3>Días con marcación por mes</h3>
+    <p class="note">La línea punteada indica los días laborables del mes (lunes a viernes).</p>
+    <div class="legend" id="lg1"></div><div id="ch1"></div>
+  </div></div>
+
+  <h2 class="section-label">Cómo marcan</h2>
+  <div class="grid g2">
+    <div class="panel"><h3>Hora de la primera marcación</h3><p class="note">Cantidad de días según la franja de media hora.</p><div class="legend" id="lg2"></div><div id="ch2"></div></div>
+    <div class="panel"><h3>Marcaciones por día</h3><p class="note">Cuántos días tuvieron 1, 2, 3… marcaciones.</p><div class="legend" id="lg3"></div><div id="ch3"></div></div>
+  </div>
+
+  <div id="secCal">
+  <h2 class="section-label">Calendario de marcaciones</h2>
+  <div class="grid"><div class="panel">
+    <p class="note">Cada celda es un día laborable. El color indica cuántas marcaciones se registraron; pase el cursor para ver las horas.</p>
+    <div class="legend" id="calLegend"></div>
+    <div class="scroll-x" id="cals"></div>
+  </div></div>
+  </div>
+
+  <div id="secHojas">
+  <h2 class="section-label">Detalle y hojas de origen</h2>
+  <div class="grid"><div class="panel">
+    <div class="tabs" id="tabs">
+      <button aria-selected="true" data-t="Detalle">Detalle diario</button>
+      <button aria-selected="false" data-t="Sin">Sin marcación</button>
+      <button aria-selected="false" data-t="Hojas">Hojas de origen</button>
+    </div>
+    <div class="tp on" id="tpDetalle">
+      <div class="tools">
+        <select id="dStatus"><option value="all">Todos los estados</option><option value="con">Con marcación</option><option value="sin">Sin marcación</option><option value="fer">Feriado</option></select>
+        <input type="search" id="dSearch" placeholder="Buscar fecha, nombre u hora">
+        <span id="dCount" style="color:var(--ink-soft);font-size:.82rem"></span>
+      </div>
+      <div class="tbl-wrap"><table id="dTable"><thead></thead><tbody></tbody></table></div>
+    </div>
+    <div class="tp" id="tpSin"><p class="note">Días laborables sin ningún registro en el ERP, según los filtros activos.</p><div id="missing"></div></div>
+    <div class="tp" id="tpHojas"><p class="note">Las cinco hojas Excel recibidas en el correo, tal como las generó el ERP.</p><div id="sources"></div>
+      <div class="info-box" style="margin:0"><h4>Rango de fechas</h4><p>El nombre de cada archivo dice «Del 03-08-2026 al 12-08-2026», pero el encabezado interno de las hojas indica 03/08/2026 al 12/11/2026 y los datos llegan hasta el 12 de noviembre. El dashboard usa el rango interno.</p></div>
+    </div>
+  </div></div>
+  </div>
+
+  <footer>Los días «sin marcación» son días laborables sin ningún registro en el ERP. No se descuentan licencias, vacaciones, comisiones de servicio ni horarios especiales: solo los feriados (6 de agosto, 8 de octubre y 2 de noviembre) si el filtro está activo. Fuente: ERP University, reportes del 13/11/2026 · Universidad Andina del Cusco.</footer>
+</main>
+<div id="tip"></div>
+
+<script>
+const DATA = {"people": {"lita": {"name": "Dra. Lita del Pozo Aedo", "role": "Directora · Docente", "code": "T06241", "total": 23, "days": [{"date": "2026-09-09", "n": 1, "first": "10:09:24", "last": "10:09:24", "marks": ["10:09:24"], "wd": 2}, {"date": "2026-09-10", "n": 1, "first": "09:58:11", "last": "09:58:11", "marks": ["09:58:11"], "wd": 3}, {"date": "2026-09-11", "n": 1, "first": "10:03:54", "last": "10:03:54", "marks": ["10:03:54"], "wd": 4}, {"date": "2026-09-14", "n": 1, "first": "09:51:04", "last": "09:51:04", "marks": ["09:51:04"], "wd": 0}, {"date": "2026-09-15", "n": 1, "first": "10:03:04", "last": "10:03:04", "marks": ["10:03:04"], "wd": 1}, {"date": "2026-09-16", "n": 2, "first": "09:59:07", "last": "13:15:56", "marks": ["09:59:07", "13:15:56"], "wd": 2}, {"date": "2026-09-17", "n": 1, "first": "09:55:18", "last": "09:55:18", "marks": ["09:55:18"], "wd": 3}, {"date": "2026-09-28", "n": 2, "first": "09:53:08", "last": "12:55:39", "marks": ["09:53:08", "12:55:39"], "wd": 0}, {"date": "2026-09-29", "n": 1, "first": "10:00:00", "last": "10:00:00", "marks": ["10:00:00"], "wd": 1}, {"date": "2026-10-13", "n": 1, "first": "07:00:34", "last": "07:00:34", "marks": ["07:00:34"], "wd": 1}, {"date": "2026-10-14", "n": 2, "first": "07:02:15", "last": "09:59:38", "marks": ["07:02:15", "09:59:38"], "wd": 2}, {"date": "2026-10-15", "n": 1, "first": "07:02:28", "last": "07:02:28", "marks": ["07:02:28"], "wd": 3}, {"date": "2026-10-16", "n": 1, "first": "07:01:44", "last": "07:01:44", "marks": ["07:01:44"], "wd": 4}, {"date": "2026-10-19", "n": 1, "first": "07:02:29", "last": "07:02:29", "marks": ["07:02:29"], "wd": 0}, {"date": "2026-10-21", "n": 1, "first": "07:01:33", "last": "07:01:33", "marks": ["07:01:33"], "wd": 2}, {"date": "2026-10-27", "n": 1, "first": "07:01:47", "last": "07:01:47", "marks": ["07:01:47"], "wd": 1}, {"date": "2026-10-28", "n": 1, "first": "06:59:14", "last": "06:59:14", "marks": ["06:59:14"], "wd": 2}, {"date": "2026-10-29", "n": 1, "first": "07:01:30", "last": "07:01:30", "marks": ["07:01:30"], "wd": 3}, {"date": "2026-11-11", "n": 1, "first": "07:05:35", "last": "07:05:35", "marks": ["07:05:35"], "wd": 2}, {"date": "2026-11-12", "n": 1, "first": "06:57:31", "last": "06:57:31", "marks": ["06:57:31"], "wd": 3}]}, "gabriela": {"name": "Gabriela Astete Calderón", "role": "Administrativo", "code": "T06874", "total": 260, "days": [{"date": "2026-08-03", "n": 2, "first": "14:01:12", "last": "16:42:45", "marks": ["14:01:12", "16:42:45"], "wd": 0}, {"date": "2026-08-04", "n": 4, "first": "07:46:10", "last": "16:08:36", "marks": ["07:46:10", "13:03:37", "13:57:50", "16:08:36"], "wd": 1}, {"date": "2026-08-05", "n": 4, "first": "07:57:47", "last": "15:07:34", "marks": ["07:57:47", "12:57:57", "13:44:06", "15:07:34"], "wd": 2}, {"date": "2026-08-07", "n": 4, "first": "09:36:30", "last": "20:14:11", "marks": ["09:36:30", "13:05:17", "13:47:56", "20:14:11"], "wd": 4}, {"date": "2026-08-10", "n": 4, "first": "07:43:59", "last": "17:07:18", "marks": ["07:43:59", "13:02:07", "13:38:32", "17:07:18"], "wd": 0}, {"date": "2026-08-11", "n": 4, "first": "07:44:25", "last": "16:57:50", "marks": ["07:44:25", "13:00:22", "13:50:07", "16:57:50"], "wd": 1}, {"date": "2026-08-12", "n": 4, "first": "07:55:29", "last": "16:00:14", "marks": ["07:55:29", "13:03:46", "13:44:23", "16:00:14"], "wd": 2}, {"date": "2026-08-13", "n": 6, "first": "07:51:06", "last": "16:05:07", "marks": ["07:51:06", "09:26:37", "12:07:17", "13:07:39", "13:43:44", "16:05:07"], "wd": 3}, {"date": "2026-08-14", "n": 4, "first": "07:54:57", "last": "18:19:05", "marks": ["07:54:57", "13:02:22", "13:35:25", "18:19:05"], "wd": 4}, {"date": "2026-08-17", "n": 4, "first": "07:56:08", "last": "16:23:12", "marks": ["07:56:08", "13:02:59", "13:49:00", "16:23:12"], "wd": 0}, {"date": "2026-08-18", "n": 4, "first": "07:51:37", "last": "16:17:54", "marks": ["07:51:37", "13:01:44", "13:42:16", "16:17:54"], "wd": 1}, {"date": "2026-08-19", "n": 4, "first": "07:57:47", "last": "16:22:10", "marks": ["07:57:47", "13:01:50", "13:36:31", "16:22:10"], "wd": 2}, {"date": "2026-08-20", "n": 4, "first": "10:15:58", "last": "16:06:25", "marks": ["10:15:58", "13:06:09", "13:43:27", "16:06:25"], "wd": 3}, {"date": "2026-08-21", "n": 4, "first": "07:57:51", "last": "16:40:30", "marks": ["07:57:51", "13:02:06", "14:00:17", "16:40:30"], "wd": 4}, {"date": "2026-08-24", "n": 4, "first": "07:52:47", "last": "16:04:57", "marks": ["07:52:47", "13:08:44", "13:45:53", "16:04:57"], "wd": 0}, {"date": "2026-08-25", "n": 4, "first": "07:56:57", "last": "16:03:35", "marks": ["07:56:57", "13:07:15", "13:43:01", "16:03:35"], "wd": 1}, {"date": "2026-08-26", "n": 6, "first": "08:00:50", "last": "16:17:29", "marks": ["08:00:50", "08:25:55", "12:01:04", "13:05:55", "13:33:27", "16:17:29"], "wd": 2}, {"date": "2026-08-27", "n": 4, "first": "07:58:12", "last": "16:11:05", "marks": ["07:58:12", "13:03:26", "13:43:54", "16:11:05"], "wd": 3}, {"date": "2026-08-28", "n": 4, "first": "07:52:03", "last": "16:06:27", "marks": ["07:52:03", "13:09:49", "13:54:03", "16:06:27"], "wd": 4}, {"date": "2026-08-31", "n": 4, "first": "07:52:33", "last": "16:17:22", "marks": ["07:52:33", "13:03:48", "13:41:57", "16:17:22"], "wd": 0}, {"date": "2026-09-01", "n": 4, "first": "07:56:54", "last": "16:22:56", "marks": ["07:56:54", "13:04:14", "13:58:46", "16:22:56"], "wd": 1}, {"date": "2026-09-02", "n": 4, "first": "07:57:44", "last": "16:19:22", "marks": ["07:57:44", "13:07:55", "13:45:54", "16:19:22"], "wd": 2}, {"date": "2026-09-03", "n": 4, "first": "11:39:35", "last": "16:16:10", "marks": ["11:39:35", "13:08:30", "13:54:14", "16:16:10"], "wd": 3}, {"date": "2026-09-04", "n": 2, "first": "08:02:26", "last": "14:25:19", "marks": ["08:02:26", "14:25:19"], "wd": 4}, {"date": "2026-09-07", "n": 4, "first": "08:00:39", "last": "16:27:39", "marks": ["08:00:39", "13:12:46", "13:57:20", "16:27:39"], "wd": 0}, {"date": "2026-09-08", "n": 4, "first": "07:52:18", "last": "16:32:25", "marks": ["07:52:18", "13:01:06", "13:54:00", "16:32:25"], "wd": 1}, {"date": "2026-09-09", "n": 4, "first": "07:55:18", "last": "16:29:52", "marks": ["07:55:18", "13:06:47", "13:52:01", "16:29:52"], "wd": 2}, {"date": "2026-09-10", "n": 4, "first": "07:57:32", "last": "16:08:16", "marks": ["07:57:32", "13:08:38", "13:50:37", "16:08:16"], "wd": 3}, {"date": "2026-09-11", "n": 4, "first": "07:56:08", "last": "16:04:04", "marks": ["07:56:08", "13:05:43", "13:50:22", "16:04:04"], "wd": 4}, {"date": "2026-09-14", "n": 4, "first": "12:24:37", "last": "16:08:05", "marks": ["12:24:37", "13:09:36", "13:54:08", "16:08:05"], "wd": 0}, {"date": "2026-09-15", "n": 6, "first": "07:47:40", "last": "16:12:35", "marks": ["07:47:40", "10:14:14", "10:55:05", "13:15:28", "13:54:48", "16:12:35"], "wd": 1}, {"date": "2026-09-16", "n": 4, "first": "07:56:30", "last": "16:32:11", "marks": ["07:56:30", "13:15:37", "13:57:43", "16:32:11"], "wd": 2}, {"date": "2026-09-17", "n": 4, "first": "07:59:41", "last": "16:09:24", "marks": ["07:59:41", "13:01:33", "13:51:18", "16:09:24"], "wd": 3}, {"date": "2026-09-18", "n": 5, "first": "08:07:28", "last": "16:00:00", "marks": ["08:07:28", "13:00:00", "13:22:58", "14:00:00", "16:00:00"], "wd": 4}, {"date": "2026-09-22", "n": 4, "first": "07:56:22", "last": "16:18:42", "marks": ["07:56:22", "13:01:35", "13:43:18", "16:18:42"], "wd": 1}, {"date": "2026-09-23", "n": 4, "first": "07:53:24", "last": "16:02:18", "marks": ["07:53:24", "13:09:23", "13:55:38", "16:02:18"], "wd": 2}, {"date": "2026-09-24", "n": 4, "first": "07:51:52", "last": "16:10:39", "marks": ["07:51:52", "13:04:59", "13:51:47", "16:10:39"], "wd": 3}, {"date": "2026-09-25", "n": 2, "first": "07:40:53", "last": "13:08:41", "marks": ["07:40:53", "13:08:41"], "wd": 4}, {"date": "2026-09-28", "n": 4, "first": "07:58:25", "last": "16:05:07", "marks": ["07:58:25", "13:01:27", "13:44:25", "16:05:07"], "wd": 0}, {"date": "2026-09-29", "n": 4, "first": "07:54:04", "last": "16:04:25", "marks": ["07:54:04", "13:09:09", "13:51:10", "16:04:25"], "wd": 1}, {"date": "2026-09-30", "n": 4, "first": "07:55:02", "last": "16:04:54", "marks": ["07:55:02", "13:03:39", "13:48:16", "16:04:54"], "wd": 2}, {"date": "2026-10-01", "n": 4, "first": "07:55:06", "last": "16:03:50", "marks": ["07:55:06", "13:02:40", "13:51:37", "16:03:50"], "wd": 3}, {"date": "2026-10-02", "n": 2, "first": "07:58:45", "last": "13:12:34", "marks": ["07:58:45", "13:12:34"], "wd": 4}, {"date": "2026-10-05", "n": 4, "first": "07:59:16", "last": "16:19:12", "marks": ["07:59:16", "13:03:50", "13:41:05", "16:19:12"], "wd": 0}, {"date": "2026-10-06", "n": 4, "first": "07:58:23", "last": "16:16:29", "marks": ["07:58:23", "13:04:57", "13:49:35", "16:16:29"], "wd": 1}, {"date": "2026-10-07", "n": 3, "first": "08:02:27", "last": "13:59:36", "marks": ["08:02:27", "13:09:00", "13:59:36"], "wd": 2}, {"date": "2026-10-09", "n": 3, "first": "08:09:39", "last": "13:32:39", "marks": ["08:09:39", "13:03:13", "13:32:39"], "wd": 4}, {"date": "2026-10-12", "n": 4, "first": "07:58:47", "last": "16:13:11", "marks": ["07:58:47", "13:02:13", "13:53:11", "16:13:11"], "wd": 0}, {"date": "2026-10-13", "n": 4, "first": "07:56:42", "last": "16:05:43", "marks": ["07:56:42", "13:06:23", "13:46:53", "16:05:43"], "wd": 1}, {"date": "2026-10-14", "n": 4, "first": "07:57:10", "last": "16:13:38", "marks": ["07:57:10", "13:05:20", "14:00:14", "16:13:38"], "wd": 2}, {"date": "2026-10-15", "n": 6, "first": "07:59:54", "last": "16:07:32", "marks": ["07:59:54", "10:39:47", "11:59:11", "13:05:58", "13:58:11", "16:07:32"], "wd": 3}, {"date": "2026-10-16", "n": 2, "first": "07:58:56", "last": "13:03:04", "marks": ["07:58:56", "13:03:04"], "wd": 4}, {"date": "2026-10-19", "n": 4, "first": "07:58:05", "last": "16:15:15", "marks": ["07:58:05", "10:13:05", "14:01:42", "16:15:15"], "wd": 0}, {"date": "2026-10-20", "n": 4, "first": "07:57:48", "last": "16:15:38", "marks": ["07:57:48", "13:10:44", "13:45:59", "16:15:38"], "wd": 1}, {"date": "2026-10-21", "n": 2, "first": "08:00:08", "last": "16:06:27", "marks": ["08:00:08", "16:06:27"], "wd": 2}, {"date": "2026-10-22", "n": 3, "first": "13:15:13", "last": "16:10:39", "marks": ["13:15:13", "15:52:02", "16:10:39"], "wd": 3}, {"date": "2026-10-23", "n": 2, "first": "09:36:38", "last": "10:18:25", "marks": ["09:36:38", "10:18:25"], "wd": 4}, {"date": "2026-10-27", "n": 4, "first": "08:01:56", "last": "16:09:38", "marks": ["08:01:56", "13:11:58", "13:53:15", "16:09:38"], "wd": 1}, {"date": "2026-10-28", "n": 3, "first": "07:54:00", "last": "16:14:35", "marks": ["07:54:00", "13:04:13", "16:14:35"], "wd": 2}, {"date": "2026-10-29", "n": 4, "first": "07:55:57", "last": "16:12:01", "marks": ["07:55:57", "13:07:17", "13:26:18", "16:12:01"], "wd": 3}, {"date": "2026-10-30", "n": 2, "first": "07:59:46", "last": "13:15:39", "marks": ["07:59:46", "13:15:39"], "wd": 4}, {"date": "2026-11-03", "n": 3, "first": "07:44:25", "last": "13:58:11", "marks": ["07:44:25", "13:22:05", "13:58:11"], "wd": 1}, {"date": "2026-11-04", "n": 4, "first": "07:49:57", "last": "16:52:02", "marks": ["07:49:57", "13:05:10", "13:41:45", "16:52:02"], "wd": 2}, {"date": "2026-11-05", "n": 2, "first": "09:12:53", "last": "13:15:43", "marks": ["09:12:53", "13:15:43"], "wd": 3}, {"date": "2026-11-06", "n": 2, "first": "07:59:00", "last": "14:59:30", "marks": ["07:59:00", "14:59:30"], "wd": 4}, {"date": "2026-11-09", "n": 4, "first": "07:54:42", "last": "16:49:34", "marks": ["07:54:42", "13:01:32", "13:48:34", "16:49:34"], "wd": 0}, {"date": "2026-11-10", "n": 4, "first": "07:59:20", "last": "16:18:44", "marks": ["07:59:20", "13:07:01", "13:48:14", "16:18:44"], "wd": 1}, {"date": "2026-11-11", "n": 4, "first": "08:48:06", "last": "16:12:30", "marks": ["08:48:06", "13:25:07", "13:51:04", "16:12:30"], "wd": 2}, {"date": "2026-11-12", "n": 4, "first": "08:02:43", "last": "16:30:06", "marks": ["08:02:43", "13:14:58", "13:45:41", "16:30:06"], "wd": 3}]}, "mercedes": {"name": "Mercedes Unuysoncco Tumpay", "role": "Administrativo", "code": "T07174", "total": 259, "days": [{"date": "2026-08-03", "n": 4, "first": "07:51:14", "last": "17:27:15", "marks": ["07:51:14", "13:24:07", "13:43:12", "17:27:15"], "wd": 0}, {"date": "2026-08-04", "n": 4, "first": "07:46:29", "last": "17:30:02", "marks": ["07:46:29", "13:07:09", "13:39:29", "17:30:02"], "wd": 1}, {"date": "2026-08-05", "n": 3, "first": "13:02:54", "last": "16:01:18", "marks": ["13:02:54", "13:31:43", "16:01:18"], "wd": 2}, {"date": "2026-08-07", "n": 4, "first": "07:52:30", "last": "16:24:19", "marks": ["07:52:30", "13:08:50", "13:33:53", "16:24:19"], "wd": 4}, {"date": "2026-08-10", "n": 4, "first": "07:55:35", "last": "16:25:47", "marks": ["07:55:35", "13:14:42", "13:40:21", "16:25:47"], "wd": 0}, {"date": "2026-08-11", "n": 3, "first": "13:06:23", "last": "17:40:51", "marks": ["13:06:23", "13:37:06", "17:40:51"], "wd": 1}, {"date": "2026-08-12", "n": 4, "first": "07:48:45", "last": "16:01:35", "marks": ["07:48:45", "13:05:21", "13:26:01", "16:01:35"], "wd": 2}, {"date": "2026-08-13", "n": 3, "first": "13:13:28", "last": "16:12:54", "marks": ["13:13:28", "13:47:55", "16:12:54"], "wd": 3}, {"date": "2026-08-14", "n": 4, "first": "07:41:36", "last": "16:53:18", "marks": ["07:41:36", "13:09:14", "13:35:03", "16:53:18"], "wd": 4}, {"date": "2026-08-17", "n": 3, "first": "13:06:12", "last": "17:12:10", "marks": ["13:06:12", "13:34:13", "17:12:10"], "wd": 0}, {"date": "2026-08-18", "n": 3, "first": "13:15:45", "last": "16:19:02", "marks": ["13:15:45", "13:48:34", "16:19:02"], "wd": 1}, {"date": "2026-08-19", "n": 4, "first": "07:46:36", "last": "17:25:05", "marks": ["07:46:36", "13:04:53", "13:36:54", "17:25:05"], "wd": 2}, {"date": "2026-08-20", "n": 4, "first": "07:54:55", "last": "16:49:45", "marks": ["07:54:55", "13:10:00", "13:32:03", "16:49:45"], "wd": 3}, {"date": "2026-08-21", "n": 3, "first": "13:03:09", "last": "16:21:41", "marks": ["13:03:09", "13:22:44", "16:21:41"], "wd": 4}, {"date": "2026-08-24", "n": 4, "first": "07:49:00", "last": "16:54:02", "marks": ["07:49:00", "13:03:38", "13:45:15", "16:54:02"], "wd": 0}, {"date": "2026-08-25", "n": 3, "first": "07:52:09", "last": "17:15:28", "marks": ["07:52:09", "13:01:51", "17:15:28"], "wd": 1}, {"date": "2026-08-26", "n": 4, "first": "12:00:59", "last": "17:37:56", "marks": ["12:00:59", "13:03:43", "13:34:40", "17:37:56"], "wd": 2}, {"date": "2026-08-27", "n": 4, "first": "07:52:23", "last": "16:42:10", "marks": ["07:52:23", "13:13:26", "13:39:29", "16:42:10"], "wd": 3}, {"date": "2026-08-28", "n": 4, "first": "07:48:29", "last": "16:14:09", "marks": ["07:48:29", "13:12:31", "13:54:10", "16:14:09"], "wd": 4}, {"date": "2026-08-31", "n": 4, "first": "07:55:03", "last": "16:05:53", "marks": ["07:55:03", "13:04:54", "13:40:52", "16:05:53"], "wd": 0}, {"date": "2026-09-01", "n": 3, "first": "13:22:25", "last": "16:16:48", "marks": ["13:22:25", "13:49:06", "16:16:48"], "wd": 1}, {"date": "2026-09-02", "n": 4, "first": "07:48:56", "last": "17:42:12", "marks": ["07:48:56", "13:10:24", "13:45:51", "17:42:12"], "wd": 2}, {"date": "2026-09-03", "n": 4, "first": "11:14:30", "last": "17:21:00", "marks": ["11:14:30", "13:14:48", "13:49:07", "17:21:00"], "wd": 3}, {"date": "2026-09-04", "n": 3, "first": "07:51:47", "last": "13:47:12", "marks": ["07:51:47", "13:18:48", "13:47:12"], "wd": 4}, {"date": "2026-09-07", "n": 4, "first": "08:00:05", "last": "16:25:03", "marks": ["08:00:05", "13:21:14", "13:39:12", "16:25:03"], "wd": 0}, {"date": "2026-09-08", "n": 6, "first": "07:58:36", "last": "16:20:50", "marks": ["07:58:36", "08:57:37", "10:49:26", "13:15:56", "13:50:58", "16:20:50"], "wd": 1}, {"date": "2026-09-09", "n": 4, "first": "08:03:25", "last": "17:17:13", "marks": ["08:03:25", "13:12:25", "13:35:34", "17:17:13"], "wd": 2}, {"date": "2026-09-10", "n": 3, "first": "13:15:24", "last": "16:30:57", "marks": ["13:15:24", "13:50:29", "16:30:57"], "wd": 3}, {"date": "2026-09-11", "n": 4, "first": "07:56:34", "last": "16:10:42", "marks": ["07:56:34", "13:09:04", "13:40:47", "16:10:42"], "wd": 4}, {"date": "2026-09-14", "n": 3, "first": "13:09:47", "last": "16:32:31", "marks": ["13:09:47", "13:34:17", "16:32:31"], "wd": 0}, {"date": "2026-09-15", "n": 4, "first": "07:58:19", "last": "16:10:40", "marks": ["07:58:19", "13:18:06", "13:54:38", "16:10:40"], "wd": 1}, {"date": "2026-09-16", "n": 4, "first": "07:55:04", "last": "17:19:00", "marks": ["07:55:04", "13:14:38", "13:47:35", "17:19:00"], "wd": 2}, {"date": "2026-09-17", "n": 4, "first": "07:56:35", "last": "16:45:05", "marks": ["07:56:35", "13:02:46", "13:51:21", "16:45:05"], "wd": 3}, {"date": "2026-09-18", "n": 5, "first": "07:57:40", "last": "16:00:00", "marks": ["07:57:40", "13:00:00", "13:23:04", "14:00:00", "16:00:00"], "wd": 4}, {"date": "2026-09-21", "n": 3, "first": "13:19:53", "last": "16:43:02", "marks": ["13:19:53", "13:46:04", "16:43:02"], "wd": 0}, {"date": "2026-09-22", "n": 4, "first": "07:49:25", "last": "16:15:06", "marks": ["07:49:25", "13:02:30", "13:31:24", "16:15:06"], "wd": 1}, {"date": "2026-09-23", "n": 4, "first": "07:52:49", "last": "16:06:35", "marks": ["07:52:49", "13:08:00", "13:55:33", "16:06:35"], "wd": 2}, {"date": "2026-09-24", "n": 4, "first": "07:54:41", "last": "16:40:46", "marks": ["07:54:41", "13:04:52", "13:51:54", "16:40:46"], "wd": 3}, {"date": "2026-09-25", "n": 4, "first": "08:01:15", "last": "14:25:04", "marks": ["08:01:15", "13:10:43", "13:51:42", "14:25:04"], "wd": 4}, {"date": "2026-09-28", "n": 4, "first": "07:51:56", "last": "16:05:40", "marks": ["07:51:56", "13:05:23", "13:34:51", "16:05:40"], "wd": 0}, {"date": "2026-09-29", "n": 3, "first": "13:16:39", "last": "16:02:13", "marks": ["13:16:39", "13:51:05", "16:02:13"], "wd": 1}, {"date": "2026-09-30", "n": 4, "first": "08:01:39", "last": "16:05:08", "marks": ["08:01:39", "13:10:24", "13:48:23", "16:05:08"], "wd": 2}, {"date": "2026-10-01", "n": 4, "first": "07:57:19", "last": "16:10:29", "marks": ["07:57:19", "13:03:21", "13:41:02", "16:10:29"], "wd": 3}, {"date": "2026-10-02", "n": 4, "first": "08:03:53", "last": "14:10:19", "marks": ["08:03:53", "13:09:36", "13:34:11", "14:10:19"], "wd": 4}, {"date": "2026-10-05", "n": 3, "first": "07:54:15", "last": "16:29:21", "marks": ["07:54:15", "13:41:12", "16:29:21"], "wd": 0}, {"date": "2026-10-06", "n": 4, "first": "07:52:44", "last": "16:35:23", "marks": ["07:52:44", "13:09:01", "13:49:29", "16:35:23"], "wd": 1}, {"date": "2026-10-07", "n": 3, "first": "07:57:14", "last": "13:29:19", "marks": ["07:57:14", "13:08:00", "13:29:19"], "wd": 2}, {"date": "2026-10-09", "n": 3, "first": "07:47:37", "last": "14:15:42", "marks": ["07:47:37", "13:08:24", "14:15:42"], "wd": 4}, {"date": "2026-10-12", "n": 4, "first": "07:49:10", "last": "16:28:29", "marks": ["07:49:10", "13:10:48", "13:53:13", "16:28:29"], "wd": 0}, {"date": "2026-10-13", "n": 4, "first": "07:51:49", "last": "17:21:48", "marks": ["07:51:49", "13:08:20", "13:41:59", "17:21:48"], "wd": 1}, {"date": "2026-10-14", "n": 4, "first": "07:54:08", "last": "17:33:40", "marks": ["07:54:08", "13:07:15", "14:00:18", "17:33:40"], "wd": 2}, {"date": "2026-10-15", "n": 4, "first": "07:53:19", "last": "16:26:19", "marks": ["07:53:19", "13:09:03", "13:52:38", "16:26:19"], "wd": 3}, {"date": "2026-10-16", "n": 2, "first": "07:51:54", "last": "13:11:26", "marks": ["07:51:54", "13:11:26"], "wd": 4}, {"date": "2026-10-19", "n": 4, "first": "08:04:24", "last": "16:08:51", "marks": ["08:04:24", "13:28:55", "13:50:09", "16:08:51"], "wd": 0}, {"date": "2026-10-20", "n": 4, "first": "07:45:56", "last": "16:28:54", "marks": ["07:45:56", "13:17:35", "13:45:22", "16:28:54"], "wd": 1}, {"date": "2026-10-21", "n": 1, "first": "07:35:28", "last": "07:35:28", "marks": ["07:35:28"], "wd": 2}, {"date": "2026-10-22", "n": 2, "first": "15:50:05", "last": "16:40:34", "marks": ["15:50:05", "16:40:34"], "wd": 3}, {"date": "2026-10-23", "n": 4, "first": "07:50:16", "last": "14:20:13", "marks": ["07:50:16", "13:07:45", "13:37:33", "14:20:13"], "wd": 4}, {"date": "2026-10-26", "n": 4, "first": "08:00:30", "last": "16:21:42", "marks": ["08:00:30", "13:12:21", "13:47:46", "16:21:42"], "wd": 0}, {"date": "2026-10-27", "n": 3, "first": "07:58:35", "last": "16:19:10", "marks": ["07:58:35", "13:09:21", "16:19:10"], "wd": 1}, {"date": "2026-10-28", "n": 4, "first": "07:57:01", "last": "16:09:14", "marks": ["07:57:01", "13:02:50", "13:49:34", "16:09:14"], "wd": 2}, {"date": "2026-10-29", "n": 4, "first": "07:53:00", "last": "16:19:22", "marks": ["07:53:00", "13:26:54", "13:46:57", "16:19:22"], "wd": 3}, {"date": "2026-10-30", "n": 2, "first": "07:50:17", "last": "13:14:07", "marks": ["07:50:17", "13:14:07"], "wd": 4}, {"date": "2026-11-03", "n": 4, "first": "08:02:11", "last": "17:00:39", "marks": ["08:02:11", "13:12:32", "13:46:39", "17:00:39"], "wd": 1}, {"date": "2026-11-04", "n": 4, "first": "07:51:54", "last": "16:28:52", "marks": ["07:51:54", "13:06:04", "13:32:04", "16:28:52"], "wd": 2}, {"date": "2026-11-05", "n": 3, "first": "07:55:47", "last": "13:41:28", "marks": ["07:55:47", "13:11:28", "13:41:28"], "wd": 3}, {"date": "2026-11-06", "n": 3, "first": "07:50:34", "last": "13:43:35", "marks": ["07:50:34", "13:17:04", "13:43:35"], "wd": 4}, {"date": "2026-11-09", "n": 4, "first": "07:57:57", "last": "16:41:53", "marks": ["07:57:57", "13:11:33", "13:42:21", "16:41:53"], "wd": 0}, {"date": "2026-11-10", "n": 4, "first": "07:54:50", "last": "16:20:08", "marks": ["07:54:50", "13:14:51", "13:37:21", "16:20:08"], "wd": 1}, {"date": "2026-11-11", "n": 4, "first": "07:57:06", "last": "17:10:41", "marks": ["07:57:06", "13:33:55", "13:52:08", "17:10:41"], "wd": 2}, {"date": "2026-11-12", "n": 4, "first": "07:50:06", "last": "16:26:22", "marks": ["07:50:06", "13:08:28", "13:43:39", "16:26:22"], "wd": 3}]}}, "faltas": {"mercedes": [], "gabriela": []}, "meta": {"range": ["2026-08-03", "2026-11-12"], "generated": "2026-11-13", "user": "crosas", "informe": "043-2026-CP-RRHH-UAC", "oficio": "238-2026-CI-UAC", "ticket": "00894"}, "sheets": [{"id": "lita", "type": "marcaciones", "file": "Reporte de marcaciones. Del 03-08-2026 al 12-08-2026. Dra. Lita del Pozo Aedo. Centro de Idiomas.xlsx", "sheet": "reporteAsistenciaDiaria (76)", "hdr": {"Sede": "TODOS", "Condicion Laboral": "Docente", "Unidad Operativa": "TODOS", "Fecha inicio": "03/08/2026", "Fecha Termino": "12/11/2026", "Trabajador": "DEL POZO AEDO LITA", "Estado": "TODOS", "Sexo": "TODOS"}, "raw": [[1, "2026-09-09", "10:09:24"], [2, "2026-09-10", "09:58:11"], [3, "2026-09-11", "10:03:54"], [4, "2026-11-11", "07:05:35"], [5, "2026-11-12", "06:57:31"], [6, "2026-10-13", "07:00:34"], [7, "2026-09-14", "09:51:04"], [8, "2026-10-14", "07:02:15"], [9, "2026-10-14", "09:59:38"], [10, "2026-09-15", "10:03:04"], [11, "2026-10-15", "07:02:28"], [12, "2026-09-16", "09:59:07"], [13, "2026-09-16", "13:15:56"], [14, "2026-10-16", "07:01:44"], [15, "2026-09-17", "09:55:18"], [16, "2026-10-19", "07:02:29"], [17, "2026-10-21", "07:01:33"], [18, "2026-10-27", "07:01:47"], [19, "2026-09-28", "09:53:08"], [20, "2026-09-28", "12:55:39"], [21, "2026-10-28", "06:59:14"], [22, "2026-09-29", "10:00:00"], [23, "2026-10-29", "07:01:30"]]}, {"id": "gabriela", "type": "marcaciones", "file": "Reporte de marcaciones. Del 03-08-2026 al 12-08-2026. Srta. Gabriela Astete Calderón. Centro de Idiomas.xlsx", "sheet": "reporteAsistenciaDiaria (75)", "hdr": {"Sede": "TODOS", "Condicion Laboral": "Administrativo", "Unidad Operativa": "TODOS", "Fecha inicio": "03/08/2026", "Fecha Termino": "12/11/2026", "Trabajador": "ASTETE CALDERON GABRIELA", "Estado": "TODOS", "Sexo": "TODOS"}, "raw": [[1, "2026-09-01", "07:56:54"], [2, "2026-09-01", "13:04:14"], [3, "2026-09-01", "13:58:46"], [4, "2026-09-01", "16:22:56"], [5, "2026-10-01", "07:55:06"], [6, "2026-10-01", "13:02:40"], [7, "2026-10-01", "13:51:37"], [8, "2026-10-01", "16:03:50"], [9, "2026-09-02", "07:57:44"], [10, "2026-09-02", "13:07:55"], [11, "2026-09-02", "13:45:54"], [12, "2026-09-02", "16:19:22"], [13, "2026-10-02", "07:58:45"], [14, "2026-10-02", "13:12:34"], [15, "2026-08-03", "14:01:12"], [16, "2026-08-03", "16:42:45"], [17, "2026-09-03", "11:39:35"], [18, "2026-09-03", "13:08:30"], [19, "2026-09-03", "13:54:14"], [20, "2026-09-03", "16:16:10"], [21, "2026-11-03", "07:44:25"], [22, "2026-11-03", "13:22:05"], [23, "2026-11-03", "13:58:11"], [24, "2026-08-04", "07:46:10"], [25, "2026-08-04", "13:03:37"], [26, "2026-08-04", "13:57:50"], [27, "2026-08-04", "16:08:36"], [28, "2026-09-04", "08:02:26"], [29, "2026-09-04", "14:25:19"], [30, "2026-11-04", "07:49:57"], [31, "2026-11-04", "13:05:10"], [32, "2026-11-04", "13:41:45"], [33, "2026-11-04", "16:52:02"], [34, "2026-08-05", "07:57:47"], [35, "2026-08-05", "12:57:57"], [36, "2026-08-05", "13:44:06"], [37, "2026-08-05", "15:07:34"], [38, "2026-10-05", "07:59:16"], [39, "2026-10-05", "13:03:50"], [40, "2026-10-05", "13:41:05"], [41, "2026-10-05", "16:19:12"], [42, "2026-11-05", "09:12:53"], [43, "2026-11-05", "13:15:43"], [44, "2026-10-06", "07:58:23"], [45, "2026-10-06", "13:04:57"], [46, "2026-10-06", "13:49:35"], [47, "2026-10-06", "16:16:29"], [48, "2026-11-06", "07:59:00"], [49, "2026-11-06", "14:59:30"], [50, "2026-08-07", "09:36:30"], [51, "2026-08-07", "13:05:17"], [52, "2026-08-07", "13:47:56"], [53, "2026-08-07", "20:14:11"], [54, "2026-09-07", "08:00:39"], [55, "2026-09-07", "13:12:46"], [56, "2026-09-07", "13:57:20"], [57, "2026-09-07", "16:27:39"], [58, "2026-10-07", "08:02:27"], [59, "2026-10-07", "13:09:00"], [60, "2026-10-07", "13:59:36"], [61, "2026-09-08", "07:52:18"], [62, "2026-09-08", "13:01:06"], [63, "2026-09-08", "13:54:00"], [64, "2026-09-08", "16:32:25"], [65, "2026-09-09", "07:55:18"], [66, "2026-09-09", "13:06:47"], [67, "2026-09-09", "13:52:01"], [68, "2026-09-09", "16:29:52"], [69, "2026-10-09", "08:09:39"], [70, "2026-10-09", "13:03:13"], [71, "2026-10-09", "13:32:39"], [72, "2026-11-09", "07:54:42"], [73, "2026-11-09", "13:01:32"], [74, "2026-11-09", "13:48:34"], [75, "2026-11-09", "16:49:34"], [76, "2026-08-10", "07:43:59"], [77, "2026-08-10", "13:02:07"], [78, "2026-08-10", "13:38:32"], [79, "2026-08-10", "17:07:18"], [80, "2026-09-10", "07:57:32"], [81, "2026-09-10", "13:08:38"], [82, "2026-09-10", "13:50:37"], [83, "2026-09-10", "16:08:16"], [84, "2026-11-10", "07:59:20"], [85, "2026-11-10", "13:07:01"], [86, "2026-11-10", "13:48:14"], [87, "2026-11-10", "16:18:44"], [88, "2026-08-11", "07:44:25"], [89, "2026-08-11", "13:00:22"], [90, "2026-08-11", "13:50:07"], [91, "2026-08-11", "16:57:50"], [92, "2026-09-11", "07:56:08"], [93, "2026-09-11", "13:05:43"], [94, "2026-09-11", "13:50:22"], [95, "2026-09-11", "16:04:04"], [96, "2026-11-11", "08:48:06"], [97, "2026-11-11", "13:25:07"], [98, "2026-11-11", "13:51:04"], [99, "2026-11-11", "16:12:30"], [100, "2026-08-12", "07:55:29"], [101, "2026-08-12", "13:03:46"], [102, "2026-08-12", "13:44:23"], [103, "2026-08-12", "16:00:14"], [104, "2026-10-12", "07:58:47"], [105, "2026-10-12", "13:02:13"], [106, "2026-10-12", "13:53:11"], [107, "2026-10-12", "16:13:11"], [108, "2026-11-12", "08:02:43"], [109, "2026-11-12", "13:14:58"], [110, "2026-11-12", "13:45:41"], [111, "2026-11-12", "16:30:06"], [112, "2026-08-13", "07:51:06"], [113, "2026-08-13", "09:26:37"], [114, "2026-08-13", "12:07:17"], [115, "2026-08-13", "13:07:39"], [116, "2026-08-13", "13:43:44"], [117, "2026-08-13", "16:05:07"], [118, "2026-10-13", "07:56:42"], [119, "2026-10-13", "13:06:23"], [120, "2026-10-13", "13:46:53"], [121, "2026-10-13", "16:05:43"], [122, "2026-08-14", "07:54:57"], [123, "2026-08-14", "13:02:22"], [124, "2026-08-14", "13:35:25"], [125, "2026-08-14", "18:19:05"], [126, "2026-09-14", "12:24:37"], [127, "2026-09-14", "13:09:36"], [128, "2026-09-14", "13:54:08"], [129, "2026-09-14", "16:08:05"], [130, "2026-10-14", "07:57:10"], [131, "2026-10-14", "13:05:20"], [132, "2026-10-14", "14:00:14"], [133, "2026-10-14", "16:13:38"], [134, "2026-09-15", "07:47:40"], [135, "2026-09-15", "10:14:14"], [136, "2026-09-15", "10:55:05"], [137, "2026-09-15", "13:15:28"], [138, "2026-09-15", "13:54:48"], [139, "2026-09-15", "16:12:35"], [140, "2026-10-15", "07:59:54"], [141, "2026-10-15", "10:39:47"], [142, "2026-10-15", "11:59:11"], [143, "2026-10-15", "13:05:58"], [144, "2026-10-15", "13:58:11"], [145, "2026-10-15", "16:07:32"], [146, "2026-09-16", "07:56:30"], [147, "2026-09-16", "13:15:37"], [148, "2026-09-16", "13:57:43"], [149, "2026-09-16", "16:32:11"], [150, "2026-10-16", "07:58:56"], [151, "2026-10-16", "13:03:04"], [152, "2026-08-17", "07:56:08"], [153, "2026-08-17", "13:02:59"], [154, "2026-08-17", "13:49:00"], [155, "2026-08-17", "16:23:12"], [156, "2026-09-17", "07:59:41"], [157, "2026-09-17", "13:01:33"], [158, "2026-09-17", "13:51:18"], [159, "2026-09-17", "16:09:24"], [160, "2026-08-18", "07:51:37"], [161, "2026-08-18", "13:01:44"], [162, "2026-08-18", "13:42:16"], [163, "2026-08-18", "16:17:54"], [164, "2026-09-18", "08:07:28"], [165, "2026-09-18", "13:00:00"], [166, "2026-09-18", "13:22:58"], [167, "2026-09-18", "14:00:00"], [168, "2026-09-18", "16:00:00"], [169, "2026-08-19", "07:57:47"], [170, "2026-08-19", "13:01:50"], [171, "2026-08-19", "13:36:31"], [172, "2026-08-19", "16:22:10"], [173, "2026-10-19", "07:58:05"], [174, "2026-10-19", "10:13:05"], [175, "2026-10-19", "14:01:42"], [176, "2026-10-19", "16:15:15"], [177, "2026-08-20", "10:15:58"], [178, "2026-08-20", "13:06:09"], [179, "2026-08-20", "13:43:27"], [180, "2026-08-20", "16:06:25"], [181, "2026-10-20", "07:57:48"], [182, "2026-10-20", "13:10:44"], [183, "2026-10-20", "13:45:59"], [184, "2026-10-20", "16:15:38"], [185, "2026-08-21", "07:57:51"], [186, "2026-08-21", "13:02:06"], [187, "2026-08-21", "14:00:17"], [188, "2026-08-21", "16:40:30"], [189, "2026-10-21", "08:00:08"], [190, "2026-10-21", "16:06:27"], [191, "2026-09-22", "07:56:22"], [192, "2026-09-22", "13:01:35"], [193, "2026-09-22", "13:43:18"], [194, "2026-09-22", "16:18:42"], [195, "2026-10-22", "13:15:13"], [196, "2026-10-22", "15:52:02"], [197, "2026-10-22", "16:10:39"], [198, "2026-09-23", "07:53:24"], [199, "2026-09-23", "13:09:23"], [200, "2026-09-23", "13:55:38"], [201, "2026-09-23", "16:02:18"], [202, "2026-10-23", "09:36:38"], [203, "2026-10-23", "10:18:25"], [204, "2026-08-24", "07:52:47"], [205, "2026-08-24", "13:08:44"], [206, "2026-08-24", "13:45:53"], [207, "2026-08-24", "16:04:57"], [208, "2026-09-24", "07:51:52"], [209, "2026-09-24", "13:04:59"], [210, "2026-09-24", "13:51:47"], [211, "2026-09-24", "16:10:39"], [212, "2026-08-25", "07:56:57"], [213, "2026-08-25", "13:07:15"], [214, "2026-08-25", "13:43:01"], [215, "2026-08-25", "16:03:35"], [216, "2026-09-25", "07:40:53"], [217, "2026-09-25", "13:08:41"], [218, "2026-08-26", "08:00:50"], [219, "2026-08-26", "08:25:55"], [220, "2026-08-26", "12:01:04"], [221, "2026-08-26", "13:05:55"], [222, "2026-08-26", "13:33:27"], [223, "2026-08-26", "16:17:29"], [224, "2026-08-27", "07:58:12"], [225, "2026-08-27", "13:03:26"], [226, "2026-08-27", "13:43:54"], [227, "2026-08-27", "16:11:05"], [228, "2026-10-27", "08:01:56"], [229, "2026-10-27", "13:11:58"], [230, "2026-10-27", "13:53:15"], [231, "2026-10-27", "16:09:38"], [232, "2026-08-28", "07:52:03"], [233, "2026-08-28", "13:09:49"], [234, "2026-08-28", "13:54:03"], [235, "2026-08-28", "16:06:27"], [236, "2026-09-28", "07:58:25"], [237, "2026-09-28", "13:01:27"], [238, "2026-09-28", "13:44:25"], [239, "2026-09-28", "16:05:07"], [240, "2026-10-28", "07:54:00"], [241, "2026-10-28", "13:04:13"], [242, "2026-10-28", "16:14:35"], [243, "2026-09-29", "07:54:04"], [244, "2026-09-29", "13:09:09"], [245, "2026-09-29", "13:51:10"], [246, "2026-09-29", "16:04:25"], [247, "2026-10-29", "07:55:57"], [248, "2026-10-29", "13:07:17"], [249, "2026-10-29", "13:26:18"], [250, "2026-10-29", "16:12:01"], [251, "2026-09-30", "07:55:02"], [252, "2026-09-30", "13:03:39"], [253, "2026-09-30", "13:48:16"], [254, "2026-09-30", "16:04:54"], [255, "2026-10-30", "07:59:46"], [256, "2026-10-30", "13:15:39"], [257, "2026-08-31", "07:52:33"], [258, "2026-08-31", "13:03:48"], [259, "2026-08-31", "13:41:57"], [260, "2026-08-31", "16:17:22"]]}, {"id": "mercedes", "type": "marcaciones", "file": "Reporte de marcaciones. Del 03-08-2026 al 12-08-2026. Sra. Mercedes Unuyssonco T. Centro de Idiomas.xlsx", "sheet": "reporteAsistenciaDiaria (74)", "hdr": {"Sede": "TODOS", "Condicion Laboral": "Administrativo", "Unidad Operativa": "TODOS", "Fecha inicio": "03/08/2026", "Fecha Termino": "12/11/2026", "Trabajador": "UNUYSONCCO TUMPAY MERCEDES", "Estado": "TODOS", "Sexo": "TODOS"}, "raw": [[1, "2026-09-01", "13:22:25"], [2, "2026-09-01", "13:49:06"], [3, "2026-09-01", "16:16:48"], [4, "2026-10-01", "07:57:19"], [5, "2026-10-01", "13:03:21"], [6, "2026-10-01", "13:41:02"], [7, "2026-10-01", "16:10:29"], [8, "2026-09-02", "07:48:56"], [9, "2026-09-02", "13:10:24"], [10, "2026-09-02", "13:45:51"], [11, "2026-09-02", "17:42:12"], [12, "2026-10-02", "08:03:53"], [13, "2026-10-02", "13:09:36"], [14, "2026-10-02", "13:34:11"], [15, "2026-10-02", "14:10:19"], [16, "2026-08-03", "07:51:14"], [17, "2026-08-03", "13:24:07"], [18, "2026-08-03", "13:43:12"], [19, "2026-08-03", "17:27:15"], [20, "2026-09-03", "11:14:30"], [21, "2026-09-03", "13:14:48"], [22, "2026-09-03", "13:49:07"], [23, "2026-09-03", "17:21:00"], [24, "2026-11-03", "08:02:11"], [25, "2026-11-03", "13:12:32"], [26, "2026-11-03", "13:46:39"], [27, "2026-11-03", "17:00:39"], [28, "2026-08-04", "07:46:29"], [29, "2026-08-04", "13:07:09"], [30, "2026-08-04", "13:39:29"], [31, "2026-08-04", "17:30:02"], [32, "2026-09-04", "07:51:47"], [33, "2026-09-04", "13:18:48"], [34, "2026-09-04", "13:47:12"], [35, "2026-11-04", "07:51:54"], [36, "2026-11-04", "13:06:04"], [37, "2026-11-04", "13:32:04"], [38, "2026-11-04", "16:28:52"], [39, "2026-08-05", "13:02:54"], [40, "2026-08-05", "13:31:43"], [41, "2026-08-05", "16:01:18"], [42, "2026-10-05", "07:54:15"], [43, "2026-10-05", "13:41:12"], [44, "2026-10-05", "16:29:21"], [45, "2026-11-05", "07:55:47"], [46, "2026-11-05", "13:11:28"], [47, "2026-11-05", "13:41:28"], [48, "2026-10-06", "07:52:44"], [49, "2026-10-06", "13:09:01"], [50, "2026-10-06", "13:49:29"], [51, "2026-10-06", "16:35:23"], [52, "2026-11-06", "07:50:34"], [53, "2026-11-06", "13:17:04"], [54, "2026-11-06", "13:43:35"], [55, "2026-08-07", "07:52:30"], [56, "2026-08-07", "13:08:50"], [57, "2026-08-07", "13:33:53"], [58, "2026-08-07", "16:24:19"], [59, "2026-09-07", "08:00:05"], [60, "2026-09-07", "13:21:14"], [61, "2026-09-07", "13:39:12"], [62, "2026-09-07", "16:25:03"], [63, "2026-10-07", "07:57:14"], [64, "2026-10-07", "13:08:00"], [65, "2026-10-07", "13:29:19"], [66, "2026-09-08", "07:58:36"], [67, "2026-09-08", "08:57:37"], [68, "2026-09-08", "10:49:26"], [69, "2026-09-08", "13:15:56"], [70, "2026-09-08", "13:50:58"], [71, "2026-09-08", "16:20:50"], [72, "2026-09-09", "08:03:25"], [73, "2026-09-09", "13:12:25"], [74, "2026-09-09", "13:35:34"], [75, "2026-09-09", "17:17:13"], [76, "2026-10-09", "07:47:37"], [77, "2026-10-09", "13:08:24"], [78, "2026-10-09", "14:15:42"], [79, "2026-11-09", "07:57:57"], [80, "2026-11-09", "13:11:33"], [81, "2026-11-09", "13:42:21"], [82, "2026-11-09", "16:41:53"], [83, "2026-08-10", "07:55:35"], [84, "2026-08-10", "13:14:42"], [85, "2026-08-10", "13:40:21"], [86, "2026-08-10", "16:25:47"], [87, "2026-09-10", "13:15:24"], [88, "2026-09-10", "13:50:29"], [89, "2026-09-10", "16:30:57"], [90, "2026-11-10", "07:54:50"], [91, "2026-11-10", "13:14:51"], [92, "2026-11-10", "13:37:21"], [93, "2026-11-10", "16:20:08"], [94, "2026-08-11", "13:06:23"], [95, "2026-08-11", "13:37:06"], [96, "2026-08-11", "17:40:51"], [97, "2026-09-11", "07:56:34"], [98, "2026-09-11", "13:09:04"], [99, "2026-09-11", "13:40:47"], [100, "2026-09-11", "16:10:42"], [101, "2026-11-11", "07:57:06"], [102, "2026-11-11", "13:33:55"], [103, "2026-11-11", "13:52:08"], [104, "2026-11-11", "17:10:41"], [105, "2026-08-12", "07:48:45"], [106, "2026-08-12", "13:05:21"], [107, "2026-08-12", "13:26:01"], [108, "2026-08-12", "16:01:35"], [109, "2026-10-12", "07:49:10"], [110, "2026-10-12", "13:10:48"], [111, "2026-10-12", "13:53:13"], [112, "2026-10-12", "16:28:29"], [113, "2026-11-12", "07:50:06"], [114, "2026-11-12", "13:08:28"], [115, "2026-11-12", "13:43:39"], [116, "2026-11-12", "16:26:22"], [117, "2026-08-13", "13:13:28"], [118, "2026-08-13", "13:47:55"], [119, "2026-08-13", "16:12:54"], [120, "2026-10-13", "07:51:49"], [121, "2026-10-13", "13:08:20"], [122, "2026-10-13", "13:41:59"], [123, "2026-10-13", "17:21:48"], [124, "2026-08-14", "07:41:36"], [125, "2026-08-14", "13:09:14"], [126, "2026-08-14", "13:35:03"], [127, "2026-08-14", "16:53:18"], [128, "2026-09-14", "13:09:47"], [129, "2026-09-14", "13:34:17"], [130, "2026-09-14", "16:32:31"], [131, "2026-10-14", "07:54:08"], [132, "2026-10-14", "13:07:15"], [133, "2026-10-14", "14:00:18"], [134, "2026-10-14", "17:33:40"], [135, "2026-09-15", "07:58:19"], [136, "2026-09-15", "13:18:06"], [137, "2026-09-15", "13:54:38"], [138, "2026-09-15", "16:10:40"], [139, "2026-10-15", "07:53:19"], [140, "2026-10-15", "13:09:03"], [141, "2026-10-15", "13:52:38"], [142, "2026-10-15", "16:26:19"], [143, "2026-09-16", "07:55:04"], [144, "2026-09-16", "13:14:38"], [145, "2026-09-16", "13:47:35"], [146, "2026-09-16", "17:19:00"], [147, "2026-10-16", "07:51:54"], [148, "2026-10-16", "13:11:26"], [149, "2026-08-17", "13:06:12"], [150, "2026-08-17", "13:34:13"], [151, "2026-08-17", "17:12:10"], [152, "2026-09-17", "07:56:35"], [153, "2026-09-17", "13:02:46"], [154, "2026-09-17", "13:51:21"], [155, "2026-09-17", "16:45:05"], [156, "2026-08-18", "13:15:45"], [157, "2026-08-18", "13:48:34"], [158, "2026-08-18", "16:19:02"], [159, "2026-09-18", "07:57:40"], [160, "2026-09-18", "13:00:00"], [161, "2026-09-18", "13:23:04"], [162, "2026-09-18", "14:00:00"], [163, "2026-09-18", "16:00:00"], [164, "2026-08-19", "07:46:36"], [165, "2026-08-19", "13:04:53"], [166, "2026-08-19", "13:36:54"], [167, "2026-08-19", "17:25:05"], [168, "2026-10-19", "08:04:24"], [169, "2026-10-19", "13:28:55"], [170, "2026-10-19", "13:50:09"], [171, "2026-10-19", "16:08:51"], [172, "2026-08-20", "07:54:55"], [173, "2026-08-20", "13:10:00"], [174, "2026-08-20", "13:32:03"], [175, "2026-08-20", "16:49:45"], [176, "2026-10-20", "07:45:56"], [177, "2026-10-20", "13:17:35"], [178, "2026-10-20", "13:45:22"], [179, "2026-10-20", "16:28:54"], [180, "2026-08-21", "13:03:09"], [181, "2026-08-21", "13:22:44"], [182, "2026-08-21", "16:21:41"], [183, "2026-09-21", "13:19:53"], [184, "2026-09-21", "13:46:04"], [185, "2026-09-21", "16:43:02"], [186, "2026-10-21", "07:35:28"], [187, "2026-09-22", "07:49:25"], [188, "2026-09-22", "13:02:30"], [189, "2026-09-22", "13:31:24"], [190, "2026-09-22", "16:15:06"], [191, "2026-10-22", "15:50:05"], [192, "2026-10-22", "16:40:34"], [193, "2026-09-23", "07:52:49"], [194, "2026-09-23", "13:08:00"], [195, "2026-09-23", "13:55:33"], [196, "2026-09-23", "16:06:35"], [197, "2026-10-23", "07:50:16"], [198, "2026-10-23", "13:07:45"], [199, "2026-10-23", "13:37:33"], [200, "2026-10-23", "14:20:13"], [201, "2026-08-24", "07:49:00"], [202, "2026-08-24", "13:03:38"], [203, "2026-08-24", "13:45:15"], [204, "2026-08-24", "16:54:02"], [205, "2026-09-24", "07:54:41"], [206, "2026-09-24", "13:04:52"], [207, "2026-09-24", "13:51:54"], [208, "2026-09-24", "16:40:46"], [209, "2026-08-25", "07:52:09"], [210, "2026-08-25", "13:01:51"], [211, "2026-08-25", "17:15:28"], [212, "2026-09-25", "08:01:15"], [213, "2026-09-25", "13:10:43"], [214, "2026-09-25", "13:51:42"], [215, "2026-09-25", "14:25:04"], [216, "2026-08-26", "12:00:59"], [217, "2026-08-26", "13:03:43"], [218, "2026-08-26", "13:34:40"], [219, "2026-08-26", "17:37:56"], [220, "2026-10-26", "08:00:30"], [221, "2026-10-26", "13:12:21"], [222, "2026-10-26", "13:47:46"], [223, "2026-10-26", "16:21:42"], [224, "2026-08-27", "07:52:23"], [225, "2026-08-27", "13:13:26"], [226, "2026-08-27", "13:39:29"], [227, "2026-08-27", "16:42:10"], [228, "2026-10-27", "07:58:35"], [229, "2026-10-27", "13:09:21"], [230, "2026-10-27", "16:19:10"], [231, "2026-08-28", "07:48:29"], [232, "2026-08-28", "13:12:31"], [233, "2026-08-28", "13:54:10"], [234, "2026-08-28", "16:14:09"], [235, "2026-09-28", "07:51:56"], [236, "2026-09-28", "13:05:23"], [237, "2026-09-28", "13:34:51"], [238, "2026-09-28", "16:05:40"], [239, "2026-10-28", "07:57:01"], [240, "2026-10-28", "13:02:50"], [241, "2026-10-28", "13:49:34"], [242, "2026-10-28", "16:09:14"], [243, "2026-09-29", "13:16:39"], [244, "2026-09-29", "13:51:05"], [245, "2026-09-29", "16:02:13"], [246, "2026-10-29", "07:53:00"], [247, "2026-10-29", "13:26:54"], [248, "2026-10-29", "13:46:57"], [249, "2026-10-29", "16:19:22"], [250, "2026-09-30", "08:01:39"], [251, "2026-09-30", "13:10:24"], [252, "2026-09-30", "13:48:23"], [253, "2026-09-30", "16:05:08"], [254, "2026-10-30", "07:50:17"], [255, "2026-10-30", "13:14:07"], [256, "2026-08-31", "07:55:03"], [257, "2026-08-31", "13:04:54"], [258, "2026-08-31", "13:40:52"], [259, "2026-08-31", "16:05:53"]]}, {"id": "mercedes", "type": "faltas", "file": "Reporte de faltas. Del 03-08-2026 al 12-08-2026. Sra. Mercedes Unuyssonco T. Centro de Idiomas.xlsx", "sheet": "reporteAsistenciaDiaria (78)", "hdr": {"Sede": "TODOS", "Condicion Laboral": "Administrativo", "Unidad Operativa": "TODOS", "Fecha inicio": "03/08/2026", "Fecha Termino": "12/11/2026", "Trabajador": "UNUYSONCCO TUMPAY MERCEDES", "Estado": "TODOS", "Sexo": "TODOS"}, "raw": []}, {"id": "gabriela", "type": "faltas", "file": "Reporte de faltas. Del 03-08-2026 al 12-08-2026. Srta. Gabriela Astete Calderón. Centro de Idiomas.xlsx", "sheet": "reporteAsistenciaDiaria (77)", "hdr": {"Sede": "TODOS", "Condicion Laboral": "Administrativo", "Unidad Operativa": "TODOS", "Fecha inicio": "03/08/2026", "Fecha Termino": "12/11/2026", "Trabajador": "ASTETE CALDERON GABRIELA", "Estado": "TODOS", "Sexo": "TODOS"}, "raw": []}]};
+const PRINT = new URLSearchParams(location.search).has('print');
+if (PRINT) document.body.classList.add('print');
+
+const PEOPLE = [
+  {id:'gabriela', color:'var(--p1)', hex:'#0B2E4F'},
+  {id:'mercedes', color:'var(--p2)', hex:'#5BC2E7'},
+  {id:'lita',     color:'var(--p3)', hex:'#5D7A99'}
+].map(p => ({...p, ...DATA.people[p.id]}));
+const MONTHS = [['2026-08','Ago'],['2026-09','Sep'],['2026-10','Oct'],['2026-11','Nov']];
+const HOLIDAYS = {'2026-08-06':'Batalla de Junín','2026-10-08':'Combate de Angamos','2026-11-02':'Día de los Difuntos'};
+const DOW = ['lun','mar','mié','jue','vie','sáb','dom'];
+const DOW_FULL = ['lunes','martes','miércoles','jueves','viernes','sábado','domingo'];
+const RAMP = ['#E6F5FB','#BFE6F6','#8FD3EF','#5BC2E7','#2F7FB0','#0B2E4F'];
+
+const iso = d => d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const fmtD = s => { const [y,m,d]=s.split('-'); return d+'/'+m+'/'+y; };
+const toMin = t => +t.slice(0,2)*60 + +t.slice(3,5);
+const hhmm = m => String(Math.floor(m/60)).padStart(2,'0')+':'+String(Math.round(m%60)).padStart(2,'0');
+const esc = s => String(s).replace(/"/g,'&quot;');
+
+const WEEKDAYS = [];
+for (let d=new Date(2026,7,3); d<=new Date(2026,10,12); d.setDate(d.getDate()+1)) {
+  const w=(d.getDay()+6)%7; if (w<5) WEEKDAYS.push({date:iso(d), wd:w});
+}
+PEOPLE.forEach(p => { p.map = Object.fromEntries(p.days.map(x=>[x.date,x])); });
+const state = {person:'all', month:'all', hol:true};
+
+// tooltip
+const tip = document.getElementById('tip');
+function showTip(e, html){
+  tip.innerHTML = html; tip.style.opacity = 1;
+  const w = tip.offsetWidth, h = tip.offsetHeight;
+  let x = e.clientX + 14, y = e.clientY + 14;
+  if (x + w > innerWidth - 8) x = e.clientX - w - 14;
+  if (y + h > innerHeight - 8) y = e.clientY - h - 14;
+  tip.style.left = x+'px'; tip.style.top = y+'px';
+}
+document.addEventListener('mousemove', e => { const t=e.target.closest('[data-tip]'); if(t) showTip(e,t.dataset.tip); else tip.style.opacity=0; });
+document.addEventListener('touchstart', e => { const t=e.target.closest('[data-tip]'); if(t) showTip(e.touches[0],t.dataset.tip); else tip.style.opacity=0; }, {passive:true});
+
+const inScope = date => state.month==='all' || date.startsWith(state.month);
+const workdays = () => WEEKDAYS.filter(d => inScope(d.date) && !(state.hol && HOLIDAYS[d.date]));
+const visiblePeople = () => PEOPLE.filter(p => state.person==='all' || p.id===state.person);
+const daysOf = p => p.days.filter(d => inScope(d.date) && !(state.hol && HOLIDAYS[d.date]));
+function median(a){ if(!a.length) return null; const s=[...a].sort((x,y)=>x-y), m=s.length>>1; return s.length%2?s[m]:(s[m-1]+s[m])/2; }
+function statsOf(p){
+  const wd = workdays(), ds = daysOf(p), set = new Set(ds.map(d=>d.date));
+  const missing = wd.filter(d => !set.has(d.date));
+  return {wd:wd.length, con:ds.length, sin:missing.length, missing, marks:ds.reduce((a,d)=>a+d.n,0),
+          med:median(ds.map(d=>toMin(d.first))), pct: wd.length ? Math.round(100*ds.length/wd.length) : 0};
+}
+
+function renderStats(){
+  const vp = visiblePeople(), ss = vp.map(statsOf);
+  const wd = ss.reduce((a,s)=>a+s.wd,0), con = ss.reduce((a,s)=>a+s.con,0), sin = ss.reduce((a,s)=>a+s.sin,0), marks = ss.reduce((a,s)=>a+s.marks,0);
+  const pct = wd ? Math.round(100*con/wd) : 0;
+  const withF = vp.filter(p=>p.id!=='lita').length;
+  const who = state.person==='all' ? 'las 3 personas' : vp[0].name;
+  document.getElementById('stats').innerHTML = `
+    <div class="stat hero"><div class="num">${pct}%</div><div class="lbl">Días laborables con marcación</div><div class="sub">${who} · ${state.month==='all'?'todo el periodo':MONTHS.find(m=>m[0]===state.month)[1]}</div></div>
+    <div class="stat"><div class="num">${con}</div><div class="lbl"><span class="sw" style="background:var(--navy)"></span>Días con marcación</div><div class="sub">de ${wd} días-persona laborables</div></div>
+    <div class="stat"><div class="num">${sin}</div><div class="lbl"><span class="sw" style="background:var(--celeste)"></span>Días sin marcación</div><div class="sub">sin registro en el ERP</div></div>
+    <div class="stat"><div class="num">${marks}</div><div class="lbl"><span class="sw" style="background:var(--celeste-soft)"></span>Marcaciones</div><div class="sub">registros del reloj</div></div>
+    <div class="stat"><div class="num">0</div><div class="lbl"><span class="sw" style="background:#B0BEC5"></span>Faltas en el ERP</div><div class="sub">${state.person==='lita'?'sin hoja de faltas para la Dra. Del Pozo':'en '+withF+' hoja(s) de faltas recibidas'}</div></div>`;
+  // info + insights
+  const lita = PEOPLE.find(p=>p.id==='lita');
+  document.getElementById('info').innerHTML = `<h4>Lectura rápida</h4>
+    <p>Las dos personas del personal administrativo tienen marcaciones casi todos los días laborables y el ERP no registra faltas para ellas.</p>
+    <p>Para la Dra. Lita del Pozo Aedo el reporte solo tiene marcaciones desde el ${fmtD(lita.days[0].date)}: no hay ninguna entre el 3 de agosto y el 8 de septiembre, y la mayoría de sus días tiene una sola marcación.</p>`;
+  const sorted = vp.map(p=>({p,s:statsOf(p)})).sort((a,b)=>b.s.pct-a.s.pct);
+  const top = sorted[0], low = sorted[sorted.length-1];
+  const allMed = median(vp.flatMap(p=>daysOf(p).map(d=>toMin(d.first))));
+  document.getElementById('insights').innerHTML = `
+    <div class="insight"><div class="k">Mayor cobertura</div><div class="v">${top.p.name}</div><div class="d">${top.s.pct}% de los días laborables con marcación</div></div>
+    <div class="insight"><div class="k">Menor cobertura</div><div class="v">${low.p.name}</div><div class="d">${low.s.pct}% de los días laborables con marcación</div></div>
+    <div class="insight"><div class="k">Primera marcación típica</div><div class="v">${allMed==null?'–':hhmm(allMed)}</div><div class="d">mediana de las personas seleccionadas</div></div>`;
+}
+
+function renderCards(){
+  document.getElementById('cards').innerHTML = visiblePeople().map(p => {
+    const s = statsOf(p);
+    return `<div class="panel">
+      <h3><span class="sw" style="background:${p.color}"></span>${p.name}</h3>
+      <p class="note" style="margin:0">${p.role} · código ${p.code}</p>
+      <div class="pk">
+        <div><div class="v">${s.con}<small> / ${s.wd}</small></div><div class="l">Días con marcación</div></div>
+        <div><div class="v">${s.sin}</div><div class="l">Sin marcación</div></div>
+        <div><div class="v">${s.marks}</div><div class="l">Marcaciones</div></div>
+        <div><div class="v">${s.med==null?'–':hhmm(s.med)}</div><div class="l">Primera marcación (mediana)</div></div>
+      </div>
+      <div class="rank-bar"><i style="width:${s.pct}%;background:${p.color}"></i></div>
+      <p class="note" style="margin:6px 0 0">${s.pct}% de los días laborables con marcación${p.id==='lita'?' · sin hoja de faltas':' · 0 faltas en el ERP'}</p>
+    </div>`;
+  }).join('');
+}
+
+function legend(id, items){
+  document.getElementById(id).innerHTML = items.map(i=>`<span><span class="sw" style="background:${i.color}"></span>${i.name}</span>`).join('');
+}
+function groupedBars(elId, cats, series, opt={}){
+  const W=opt.w||560, H=opt.h||260, m={l:34,r:8,t:10,b:28};
+  const iw=W-m.l-m.r, ih=H-m.t-m.b;
+  let max = Math.max(1, ...series.flatMap(s=>s.values), ...(opt.refs||[0]));
+  const step = max<=6?1 : max<=12?2 : max<=30?5 : 10;
+  max = Math.ceil(max/step)*step;
+  const y = v => m.t + ih - v/max*ih;
+  const gw = iw/cats.length, bw = Math.min(opt.bmax||26, (gw*0.78)/series.length), gap = 2;
+  let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${opt.label||''}">`;
+  for (let v=0; v<=max; v+=step){
+    svg += `<line x1="${m.l}" x2="${W-m.r}" y1="${y(v)}" y2="${y(v)}" stroke="#E4EBF2"/><text x="${m.l-6}" y="${y(v)+4}" text-anchor="end">${v}</text>`;
+  }
+  cats.forEach((c,i)=>{
+    const gx = m.l + gw*i + gw/2, tot = series.length*bw + (series.length-1)*gap;
+    svg += `<text x="${gx}" y="${H-8}" text-anchor="middle">${c}</text>`;
+    series.forEach((s,j)=>{
+      const v = s.values[i], x = gx - tot/2 + j*(bw+gap), h = v/max*ih;
+      const tipTxt = esc(opt.tip? opt.tip(c,s,v,i) : `<b>${s.name}</b><br>${c}: ${v}`);
+      if (v>0) svg += `<path d="M${x},${y(0)} v${-Math.max(h-4,0)} q0,-4 4,-4 h${bw-8} q4,0 4,4 v${Math.max(h-4,0)} z" fill="${s.hex}"/>`;
+      svg += `<rect x="${x-1}" y="${m.t}" width="${bw+2}" height="${ih}" fill="transparent" data-tip="${tipTxt}"/>`;
+    });
+    if (opt.refs) svg += `<line x1="${gx-gw*.42}" x2="${gx+gw*.42}" y1="${y(opt.refs[i])}" y2="${y(opt.refs[i])}" stroke="#6B7A8A" stroke-width="2" stroke-dasharray="4 3"/>`;
+  });
+  svg += `<line x1="${m.l}" x2="${W-m.r}" y1="${y(0)}" y2="${y(0)}" stroke="#B0BEC5"/></svg>`;
+  document.getElementById(elId).innerHTML = svg;
+}
+function renderCharts(){
+  const vp = visiblePeople();
+  const sers = vp.map(p=>({name:p.name, color:p.color, hex:p.hex}));
+  const months = MONTHS.filter(([k])=> state.month==='all' || k===state.month);
+  const wdByM = months.map(([k]) => WEEKDAYS.filter(d=>d.date.startsWith(k) && !(state.hol&&HOLIDAYS[d.date])).length);
+  const s1 = vp.map(p=>({name:p.name,color:p.color,hex:p.hex,values:months.map(([k])=>daysOf(p).filter(d=>d.date.startsWith(k)).length)}));
+  legend('lg1', [...sers, {name:'Días laborables', color:'#6B7A8A'}]);
+  groupedBars('ch1', months.map(m=>m[1]), s1, {w:900,h:280,bmax:40,refs:wdByM,label:'Días con marcación por mes',
+    tip:(c,s,v,i)=>`<b>${s.name}</b><br>${c}: ${v} de ${wdByM[i]} días laborables`});
+  const bins=[]; for(let m=6*60+30;m<16*60+30;m+=30) bins.push(m);
+  const s2 = vp.map(p=>({name:p.name,color:p.color,hex:p.hex,values:bins.map(b=>daysOf(p).filter(d=>{const t=toMin(d.first);return t>=b&&t<b+30}).length)}));
+  legend('lg2', sers);
+  groupedBars('ch2', bins.map((b,i)=> i%2===0? hhmm(b):''), s2, {h:250,label:'Hora de primera marcación',
+    tip:(c,s,v,i)=>`<b>${s.name}</b><br>${hhmm(bins[i])}–${hhmm(bins[i]+30)}: ${v} días`});
+  const ns=[1,2,3,4,5,6];
+  const s3 = vp.map(p=>({name:p.name,color:p.color,hex:p.hex,values:ns.map(n=>daysOf(p).filter(d=>d.n===n).length)}));
+  legend('lg3', sers);
+  groupedBars('ch3', ns.map(String), s3, {h:250,label:'Marcaciones por día',tip:(c,s,v)=>`<b>${s.name}</b><br>${c} marcación(es): ${v} días`});
+}
+
+function renderCalendar(){
+  document.getElementById('calLegend').innerHTML = `<span><i class="sw" style="background:#fff;border:1px dashed #6B7A8A"></i>Sin marcación</span>` +
+    RAMP.map((c,i)=>`<span><i class="sw" style="background:${c}"></i>${i+1}${i==5?'+':''}</span>`).join('') +
+    `<span><i class="sw" style="background:#C4EDED;border:1px solid #7ED4D4"></i>Feriado</span>`;
+  const weeks=[]; let cur=null;
+  WEEKDAYS.forEach(d=>{ if(d.wd===0||!cur){cur=[];weeks.push(cur);} cur[d.wd]=d; });
+  const cs=30, g=4, ml=34, mt=18, W=ml+weeks.length*(cs+g), H=mt+5*(cs+g);
+  document.getElementById('cals').innerHTML = visiblePeople().map(p=>{
+    let svg=`<svg viewBox="0 0 ${W} ${H}" style="min-width:${Math.min(W,520)}px;max-width:${W+20}px" role="img" aria-label="Calendario de ${p.name}">`;
+    ['L','M','M','J','V'].forEach((l,i)=> svg+=`<text x="${ml-10}" y="${mt+i*(cs+g)+cs/2+4}" text-anchor="end">${l}</text>`);
+    let lastMonth='';
+    weeks.forEach((w,wi)=>{
+      const first = w.find(Boolean), mk = first.date.slice(0,7), x = ml+wi*(cs+g);
+      if (mk!==lastMonth){ svg+=`<text x="${x}" y="11">${MONTHS.find(m=>m[0]===mk)[1]}</text>`; lastMonth=mk; }
+      w.forEach((d,di)=>{
+        if(!d) return;
+        const y=mt+di*(cs+g), rec=p.map[d.date], hol=HOLIDAYS[d.date];
+        const dim = state.month!=='all' && !d.date.startsWith(state.month);
+        const head = `<b>${DOW_FULL[d.wd]} ${fmtD(d.date)}</b><br>`;
+        let fill, extra='', t;
+        if (hol && !rec){ fill='#C4EDED'; extra='stroke="#7ED4D4"'; t=head+'Feriado: '+hol; }
+        else if (rec){ fill=RAMP[Math.min(rec.n,6)-1]; t=head+`${rec.n} marcación(es)<br>${rec.marks.map(m=>m.slice(0,5)).join(' · ')}`; }
+        else { fill='#fff'; extra='stroke="#6B7A8A" stroke-dasharray="3 3"'; t=head+'Sin marcación en el ERP'; }
+        svg+=`<rect x="${x}" y="${y}" width="${cs}" height="${cs}" rx="6" fill="${fill}" ${extra} opacity="${dim?.25:1}" data-tip="${esc(t)}"/>`;
+      });
+    });
+    svg+='</svg>';
+    const s=statsOf(p);
+    return `<div class="cal"><h4><span class="sw" style="background:${p.color}"></span>${p.name}<span class="m">· ${s.con} días con marcación, ${s.sin} sin marcación</span></h4>${svg}</div>`;
+  }).join('');
+}
+
+let sortKey='date', sortDir=1;
+function renderDetail(){
+  const st=document.getElementById('dStatus').value, q=document.getElementById('dSearch').value.trim().toLowerCase();
+  let rows=[];
+  visiblePeople().forEach(p=>{
+    WEEKDAYS.filter(d=>inScope(d.date)).forEach(d=>{
+      const rec=p.map[d.date], hol=HOLIDAYS[d.date];
+      rows.push({person:p.name,color:p.color,date:d.date,dow:DOW_FULL[d.wd],n:rec?rec.n:0,first:rec?rec.first:'',last:rec?rec.last:'',
+        span:rec&&rec.n>1?toMin(rec.last)-toMin(rec.first):-1,marks:rec?rec.marks.map(m=>m.slice(0,5)).join(' · '):'',status:rec?'con':(hol?'fer':'sin'),hol});
+    });
+  });
+  rows=rows.filter(r=>(st==='all'||r.status===st)&&(!q||(r.person+' '+r.date+' '+fmtD(r.date)+' '+r.dow+' '+r.marks+' '+(r.hol||'')).toLowerCase().includes(q)));
+  rows.sort((a,b)=>{const x=a[sortKey],y=b[sortKey];return (x>y?1:x<y?-1:0)*sortDir||(a.date>b.date?1:-1);});
+  const cols=[['person','Persona'],['date','Fecha'],['dow','Día'],['n','Marc.'],['first','Primera'],['last','Última'],['span','Entre 1.ª y última'],['marks','Marcaciones'],['status','Estado']];
+  document.querySelector('#dTable thead').innerHTML='<tr>'+cols.map(([k,l])=>`<th data-k="${k}">${l}${sortKey===k?(sortDir>0?' ▲':' ▼'):''}</th>`).join('')+'</tr>';
+  document.querySelector('#dTable tbody').innerHTML=rows.map(r=>`<tr>
+    <td><span class="sw" style="background:${r.color}"></span>${r.person}</td><td>${fmtD(r.date)}</td><td>${r.dow}</td><td>${r.n||'–'}</td><td>${r.first.slice(0,5)||'–'}</td><td>${r.last.slice(0,5)||'–'}</td>
+    <td>${r.span<0?'–':Math.floor(r.span/60)+' h '+String(r.span%60).padStart(2,'0')+' min'}</td><td>${r.marks||'–'}</td>
+    <td><span class="tag ${r.status==='sin'?'no':r.status==='fer'?'fer':''}">${r.status==='con'?'Con marcación':r.status==='sin'?'Sin marcación':'Feriado · '+r.hol}</span></td></tr>`).join('');
+  document.getElementById('dCount').textContent=rows.length+' filas';
+  document.querySelectorAll('#dTable th').forEach(th=>th.onclick=()=>{const k=th.dataset.k; if(sortKey===k) sortDir*=-1; else {sortKey=k;sortDir=1;} renderDetail();});
+}
+function renderMissing(){
+  document.getElementById('missing').innerHTML = visiblePeople().map(p=>{
+    const s=statsOf(p);
+    const list=s.missing.map(d=>`<span class="tag no" style="margin:2px 4px 2px 0">${DOW[d.wd]} ${fmtD(d.date).slice(0,5)}</span>`).join('');
+    return `<div style="margin:0 0 12px"><b style="color:var(--navy)"><span class="sw" style="background:${p.color}"></span>${p.name}</b> <span style="color:var(--ink-soft)">· ${s.sin} día(s)</span><div style="margin-top:4px">${list||'<span style="color:var(--ink-soft)">Ninguno</span>'}</div></div>`;
+  }).join('');
+}
+function renderSources(){
+  document.getElementById('sources').innerHTML = DATA.sheets.map(s=>{
+    const p = PEOPLE.find(x=>x.id===s.id), h = s.hdr;
+    const body = s.type==='marcaciones'
+      ? `<details><summary>Ver filas originales (${s.raw.length})</summary><div class="tbl-wrap" style="max-height:280px"><table><thead><tr><th>Nro.</th><th>Fecha</th><th>Hora</th></tr></thead><tbody>${s.raw.map(r=>`<tr><td>${r[0]}</td><td>${fmtD(r[1])}</td><td>${r[2]}</td></tr>`).join('')}</tbody></table></div></details>`
+      : `<p style="margin:6px 0 0"><span class="tag no">No se encontraron registros</span> El ERP no reporta faltas para este trabajador en el rango consultado.</p>`;
+    const nrec = s.type==='marcaciones' ? s.raw.length+' marcaciones en '+p.days.length+' días' : '0 faltas';
+    return `<div class="src"><h4><span class="sw" style="background:${p.color}"></span>${s.type==='marcaciones'?'Marcaciones':'Faltas'} · ${p.name}</h4>
+      <dl><dt>Archivo</dt><dd>${s.file}</dd><dt>Hoja</dt><dd>${s.sheet}</dd><dt>Trabajador</dt><dd>${h['Trabajador']||''}</dd>
+      <dt>Condición laboral</dt><dd>${h['Condicion Laboral']||''}</dd><dt>Rango del reporte</dt><dd>${h['Fecha inicio']||''} – ${h['Fecha Termino']||''}</dd><dt>Contenido</dt><dd>${nrec}</dd></dl>${body}</div>`;
+  }).join('');
+}
+
+function renderAll(){ renderStats(); renderCards(); renderCharts(); renderCalendar(); renderDetail(); renderMissing(); }
+// wiring
+const segP = document.getElementById('segP');
+segP.innerHTML = `<button data-v="all" aria-pressed="true">Todas</button>` + PEOPLE.map(p=>`<button data-v="${p.id}" aria-pressed="false">${{gabriela:'Gabriela',mercedes:'Mercedes',lita:'Dra. Lita'}[p.id]}</button>`).join('');
+function seg(el,key){ el.onclick=e=>{const b=e.target.closest('button'); if(!b) return; el.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b)); state[key]=b.dataset.v; renderAll();}; }
+seg(segP,'person'); seg(document.getElementById('segM'),'month');
+document.getElementById('fHol').onchange=e=>{state.hol=e.target.checked;renderAll();};
+document.getElementById('reset').onclick=()=>{state.person='all';state.month='all';state.hol=true;document.getElementById('fHol').checked=true;
+  document.querySelectorAll('.seg').forEach(s=>s.querySelectorAll('button').forEach((b,i)=>b.setAttribute('aria-pressed',i===0)));renderAll();};
+document.getElementById('dStatus').onchange=renderDetail;
+document.getElementById('dSearch').oninput=renderDetail;
+document.querySelectorAll('#tabs button').forEach(t=>t.onclick=()=>{
+  document.querySelectorAll('#tabs button').forEach(x=>x.setAttribute('aria-selected',x===t));
+  document.querySelectorAll('.tp').forEach(p=>p.classList.toggle('on',p.id==='tp'+t.dataset.t));
+});
+renderSources(); renderAll();
+</script>
+</body></html>
